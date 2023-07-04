@@ -1,30 +1,29 @@
-import { Footer } from "./components/Footer/Footer"
-import { Header } from "./components/Header/Header"
+import {
+    Route,
+    RouterProvider,
+    createBrowserRouter,
+    createRoutesFromElements,
+} from "react-router-dom";
+import { MainPage } from "./components/MainPage/MainPage";
+import { Root } from "./routes/Root";
+import { ErrorPage } from "./components/ErrorPage/ErrorPage";
 
-const data = {
-    women: [
-        {title: 'Бюстгальтеры', link: '/'},
-        {title: 'Трусы', link: '/'},
-        {title: 'Носки', link: '/'},
-        {title: 'Халаты', link: '/'},
-        {title: 'Термобелье', link: '/'},
-        {title: 'Пижамы', link: '/'}
-    ],
-    men: [
-        {title: 'Трусы', link: '/'},
-        {title: 'Носки', link: '/'},
-        {title: 'Халаты', link: '/'},
-        {title: 'Термобелье', link: '/'},
-    ]
-}
+const router = createBrowserRouter(
+    createRoutesFromElements(
+        <Route path="/" element={<Root />}>
+            <Route path="/" element={<MainPage/>} />
+            <Route path="women" index element={<MainPage gender="women" />} />
+            <Route path="men" index element={<MainPage gender="men" />} />
+            <Route path="women/:category" index element={<MainPage gender="women"/>}/>
+            <Route path="men/:category" index element={<MainPage gender="men"/>}/>
+            <Route path="*" index element={<ErrorPage/>}/>
+        </Route>       
+    )
+);
 
 export const App = () => {
-
-
     return (
-        <>
-            <Header/>
-            <Footer data={data}/>
-        </>
-    )
-}
+        <RouterProvider router={router}>
+        </RouterProvider>
+    );
+};

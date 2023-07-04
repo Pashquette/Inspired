@@ -1,5 +1,6 @@
 import cn from 'classnames'
 import s from '../Footer.module.scss'
+import { NavLink } from 'react-router-dom';
 
 export const FooterCatalog = ({data}) => {
     return (
@@ -10,7 +11,7 @@ export const FooterCatalog = ({data}) => {
                         <h3 className={s.categorySubtitle}>Женщины</h3>
                         {data.women.map((item, i) => {
                             return (
-                                <li key={i}><a className={s.link} href={item.link}>{item.title}</a></li>
+                                <li key={i}><NavLink className={s.link} to={item.link}>{item.title}</NavLink></li>
                             )
                         })}
                     </ul>
@@ -18,7 +19,7 @@ export const FooterCatalog = ({data}) => {
                         <h3 className={s.categorySubtitle}>Мужчины</h3>
                         {data.men.map((item, i) => {
                             return (
-                                <li key={i}><a className={s.link} href={item.link}>{item.title}</a></li>
+                                <li key={i}><NavLink className={s.link} to={item.link}>{item.title}</NavLink></li>
                             )
                         })}
                     </ul>

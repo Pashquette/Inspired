@@ -1,11 +1,11 @@
 import { Navigation } from "./Navigation/Navigation";
 import { Top } from "./Top/Top";
 
-export const Header = () => {
+export const Header = ({data}) => {
     return (
         <header>
             <Top/>
-            <Navigation/>
+            <Navigation data={data}/>
         </header>
     );
 };

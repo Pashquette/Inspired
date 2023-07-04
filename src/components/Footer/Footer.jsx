@@ -3,6 +3,8 @@ import s from './Footer.module.scss'
 import { FooterCatalog } from './FooterCatalog/FooterCatalog';
 import { FooterSocials } from './FooterSocials/FooterSocials';
 import { FooterContacts } from './FooterContacts/FooterContacts';
+import { FooterCopyright } from './FooterCopyright/FooterCopyright';
+import { FooterDevelopment } from './FooterDevelopment/FooterDevelopment';
 
 
 export const Footer = ({data}) => {
@@ -11,17 +13,8 @@ export const Footer = ({data}) => {
             <FooterCatalog data={data}/>
             <FooterSocials/>
             <FooterContacts/>
-
-            <div className={s.copyright}>
-                <p>© INSPIRED, 2023</p>                
-            </div>
-
-            <div className={s.development}>
-                <div className={s.developmentList}>
-                    <p>Designer: Anastasia Ilina</p>
-                    <p>Developer: </p>
-                </div>
-            </div>
+            <FooterCopyright/>
+            <FooterDevelopment/>
         </Container>
     );
 };
