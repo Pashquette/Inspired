@@ -8,14 +8,15 @@ const list = [
 ]
 
 export const Gender = () => {
-    const location = useLocation()
-    console.log(location);
+    const {pathname} = useLocation()
+    const gender = pathname.split('/')[1] || 'women';
+    console.log(gender);
     return (
        <ul className={s.gender}>
-        {list.map((item, index) => {
+        {list.map(item => {
             return (
                 <li className={s.item} key={item.link}>
-                    <NavLink className={({isActive}) => cn(s.link, isActive && s.linkActive)} to={item.link}>
+                    <NavLink className={cn(s.link, gender === item.link && s.linkActive)} to={item.link}>
                         {item.title}
                     </NavLink>
                 </li>

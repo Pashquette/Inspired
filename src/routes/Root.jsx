@@ -23,7 +23,7 @@ const data = {
 export const Root = () => {
     return (
         <>
-        <Header data={data}/>
+        <Header gender='women' data={data}/>
         <Main>
             <Outlet/>
         </Main>
