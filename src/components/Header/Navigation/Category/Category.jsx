@@ -4,12 +4,11 @@ import cn from "classnames";
 
 export const Category = ({ data }) => {
     const location = useLocation();
-    console.log(location);
     return (
         <ul className={s.category}>
-            {location.pathname.startsWith('/women') 
+            {location.pathname.startsWith('/men') 
             ?
-            data.women.map(item => {
+            data.men.map(item => {
                 return (
                     <li key={item.link}>
                         <NavLink className={({isActive}) => cn(s.link, isActive && s.linkActive)} to={item.link}>
@@ -19,7 +18,7 @@ export const Category = ({ data }) => {
                 );
             })
             :
-            data.men.map(item => {
+            data.women.map(item => {
                 return (
                     <li key={item.link}>
                         <NavLink className={({isActive}) => cn(s.link, isActive && s.linkActive)} to={item.link}>

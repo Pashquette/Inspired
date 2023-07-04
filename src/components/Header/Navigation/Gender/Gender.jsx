@@ -12,7 +12,7 @@ export const Gender = () => {
         {list.map(item => {
             return (
                 <li className={s.item} key={item.link}>
-                    <NavLink className={({isActive}) => cn(s.link, isActive && s.linkActive)} to={item.link}>
+                    <NavLink end className={({isActive}) => cn(s.link, isActive && s.linkActive)} to={item.link}>
                         {item.title}
                     </NavLink>
                 </li>
