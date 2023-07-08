@@ -6,20 +6,19 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { setActiveGender } from "../../../features/navigationSlice";
 
-export const Navigation = ({ data }) => {
+export const Navigation = () => {
     const dispatch = useDispatch();
     const location = useLocation();
-    const gender = location.pathname.split('/')[1] || 'women';
-
+    const gender = location.pathname.split("/")[1] || "women";
 
     useEffect(() => {
-        dispatch(setActiveGender(gender))
-    }, [gender, dispatch])
+        dispatch(setActiveGender(gender));
+    }, [gender, dispatch]);
     return (
         <nav>
             <Container className="container">
                 <Gender />
-                <Category data={data} />
+                <Category />
             </Container>
         </nav>
     );
