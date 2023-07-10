@@ -16,12 +16,8 @@ const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<Root />}>
             <Route path="/" element={<MainPage/>} />
-            <Route path="women" index element={<MainPage gender="women" />} />
-            <Route path="men" index element={<MainPage gender="men" />} />
-            <Route path="kids" index element={<MainPage gender="kids" />} />
-            <Route path="women/:category" index element={<MainPage gender="women"/>}/>
-            <Route path="men/:category" index element={<MainPage gender="men"/>}/>
-            <Route path="kids/:category" index element={<MainPage gender="kids"/>}/>
+            <Route path="catalog/:gender/:category?" index element={<MainPage />} />
+
             <Route path="*" index element={<ErrorPage/>}/>
         </Route>       
     )
