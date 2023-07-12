@@ -3,11 +3,11 @@ import { Container } from '../Layout/Container/Container';
 import { NavLink } from 'react-router-dom';
 import { API_URL } from '../../const';
 import { useMedia } from 'react-use';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export const Banner = ({data}) => {
 
-    const [imgURL, setImgURL] = useState()
+    const [bgURL, setBgURL] = useState('')
 
     const isMobile = useMedia('(max-width: 540px)');
     const isTablet = useMedia('(max-width: 768px)');
@@ -15,19 +15,19 @@ export const Banner = ({data}) => {
 
     useEffect(() => {
             if (isMobile) {
-                setImgURL(data.bg.mobile);
+                setBgURL(`${API_URL}/${data?.bg.mobile}`);
             } else if (isTablet) {
-                setImgURL(data.bg.tablet);
+                setBgURL(`${API_URL}/${data?.bg.desktop}`);
             } else if (isLaptop) {
-                setImgURL(data.bg.laptop);
+                setBgURL(`${API_URL}/${data?.bg.desktop}`);
             } else {
-                setImgURL(data?.bg.desktop);
+                setBgURL(`${API_URL}/${data?.bg.desktop}`);
             }       
     }, [isMobile, isTablet, isLaptop, data ]);
     return (
         data &&
         <section className={s.banner} style={{
-            backgroundImage: `url(${API_URL}/${imgURL})`
+            backgroundImage: `url(${bgURL})`
         }}>
             <Container>
                 <div className={s.content}>
