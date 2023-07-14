@@ -15,7 +15,6 @@ export const fetchCategory = createAsyncThunk(
     'goods/fetchCategory',
     async (param) => {
         const url = new URL(GOODS_URL);
-        console.log(url);
         for(const key in param) {
             url.searchParams.append(key, param[key])
         }
@@ -35,6 +34,11 @@ const goodsSlice = createSlice({
         totalCount: null,
 
     },
+    reducers: {
+        setPage: (state, action) => {
+            state.page = action.payload;
+        },
+    },
     extraReducers: builder => {
         builder
         .addCase(fetchGender.pending, (state) => {
@@ -43,6 +47,8 @@ const goodsSlice = createSlice({
         .addCase(fetchGender.fulfilled, (state, action) => {
             state.status = 'success'
             state.goodsList = action.payload;
+            state.pages = 0;
+            state.totalCount = null
         })
         .addCase(fetchGender.rejected, (state, action) => {
             state.status = 'failed'
@@ -54,7 +60,6 @@ const goodsSlice = createSlice({
         .addCase(fetchCategory.fulfilled, (state, action) => {
             state.status = 'success'
             state.goodsList = action.payload.goods;
-            state.page = action.payload.page;
             state.pages = action.payload.pages;
             state.totalCount = action.payload.totalCount;
         })
@@ -64,5 +69,7 @@ const goodsSlice = createSlice({
         })
     }
 })
+
+export const {setPage} = goodsSlice.actions;
 
 export default goodsSlice.reducer
