@@ -3,7 +3,7 @@ import s from './ColorList.module.scss'
 import { Color } from './Color/Color';
 import { ColorLabel } from './ColorLabel/ColorLabel';
 
-export const ColorList = ({colors, selectedColor, handleColorChange}) => {
+export const ColorList = ({colors, selectedColor, handleColorChange }) => {
     const {colorsList} = useSelector(state => state.colors);
 
     return handleColorChange ? (
