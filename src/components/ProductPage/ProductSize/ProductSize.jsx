@@ -1,5 +1,6 @@
 import cn from "classnames";
 import s from "./ProductSize.module.scss";
+import { Field } from "formik";
 
 export const ProductSize = ({ size, selectedSize, handleSizeChange }) => {
     return (
@@ -9,13 +10,13 @@ export const ProductSize = ({ size, selectedSize, handleSizeChange }) => {
                 {size?.map((item) => {
                     return (
                         <label className={cn(s.size, s.item)} key={item}>
-                            <input
+                            <Field
                                 type="radio"
-                                name="size"
+                                name="selectedSize"
                                 className={s.input}
                                 value={item}
-                                checked={selectedSize === item}
-                                onChange={handleSizeChange}
+                                // checked={selectedSize === item}
+                                // onChange={handleSizeChange}
                             />
                             <span className={s.check}>{item}</span>
                         </label>

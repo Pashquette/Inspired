@@ -190,4 +190,19 @@
       margin-right: 8px;
     }
   }
+
+  .errorMessage {
+    margin-left: 148px;
+    display: inline-block;
+    font-size: 15px;
+    color: tomato;
+  
+    @media (max-width: 768px) {
+      font-size: 12px;
+    }
+  
+    @media (max-width: 540px) {
+      font-size: 10px;
+    }
+  }
   

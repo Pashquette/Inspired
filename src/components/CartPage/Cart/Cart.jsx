@@ -28,12 +28,17 @@ export const Cart = ({ cartItems, goodsList }) => {
                         ))}
                     </ul>
                 ) : (
-                    <h3>В корзине пусто. :(</h3>
-                )}
+                    <h3 className={s.empty}>В корзине пусто. :(</h3>
+                )} 
+
+                {cartItems?.length 
+                ?                 
                 <div className={s.total}>
                     <p>Итого:</p>
                     <p>руб {totalPrice}</p>
-                </div>
+                </div> 
+                : null }
+
             </Container>
         </section>
     );

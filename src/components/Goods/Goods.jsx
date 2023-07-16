@@ -5,13 +5,16 @@ import s from './MainPage.module.scss'
 import { Pagination } from '../Pagination/Pagination';
 
 export const Goods = ({ title }) => {
-    const {goodsList} = useSelector(state => state.goods)
+    const { goodsList, totalCount } = useSelector(state => state.goods)
 
 
     return (
         <section>
             <Container className={s.goods}>
-                <h2 className={s.title}>{title}</h2>
+                <h2 className={s.title}>
+                    {title ?? 'Новинки'}
+                    {totalCount && totalCount > 0 ? <sup>&nbsp;({totalCount})</sup> : ''}
+                </h2>
                 <ul className={s.list}>
                     {goodsList.map(item => (
                     <li key={item.id}>

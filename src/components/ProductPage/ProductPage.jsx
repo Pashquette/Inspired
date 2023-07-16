@@ -13,8 +13,12 @@ import { Goods } from "../Goods/Goods";
 import { fetchCategory } from "../../features/goodsSlice";
 import { BtnLike } from "../BtnLike/BtnLike";
 import { addToCart } from "../../features/cartSlice";
+import { ErrorMessage, Form, Formik,} from "formik";
+import * as Yup from 'yup';
 
 export const ProductPage = () => {
+
+    
     const dispatch = useDispatch();
     const { id } = useParams();
     const { product } = useSelector((state) => state.product);
@@ -59,15 +63,25 @@ export const ProductPage = () => {
         }
     }, [colorsList, colors])
 
+    const validationSchema = Yup.object({
+        selectedSize: Yup.string().required('Не выбран размер')
+    });
+
     return (
         <>
             <section className={s.card}>
                 <Container className={s.container}>
-                    <img className={s.image} src={`${API_URL}/${product.pic}`} alt={product.title} />
-                    <form className={s.content} onSubmit={(e) => {
-                        e.preventDefault();
-                        dispatch(addToCart({id, color: selectedColor, size: selectedSize, count}));
-                    }}>
+                    <img className={s.image} src={`${API_URL}/${product?.pic}`} alt={product?.title} />
+                    <Formik 
+                        initialValues={{
+                            selectedSize: '',
+                        }}
+                        validationSchema={validationSchema}
+                        onSubmit={(values) => {
+                            dispatch(addToCart({id, color: selectedColor, size: values.selectedSize, count}));
+                        }}
+                    >
+                    <Form className={s.content}>
                         <h2 className={s.title}>{product.title}</h2>
                         <p className={s.price}>руб {product.price}</p>
                         <div className={s.vendorCode}>
@@ -81,10 +95,10 @@ export const ProductPage = () => {
                             selectedColor={selectedColor} 
                             handleColorChange={handleColorChange} />
                         </div>
-                        <ProductSize 
-                            size={product.size} 
-                            selectedSize={selectedSize} 
-                            handleSizeChange={handleSizeChange} />
+                            <ProductSize 
+                                size={product.size} 
+                                selectedSize={selectedSize} 
+                                handleSizeChange={handleSizeChange} />
 
                         <div className={s.description}>
                             <p className={cn(s.subtitle, s.descriptionTitle)}>Описание</p>
@@ -99,11 +113,14 @@ export const ProductPage = () => {
                             <button className={s.addCart} type='submit'>В корзину</button>
                             <BtnLike className={s.favorite} id={id}/>
                         </div>
+                        <ErrorMessage name="selectedSize" component="span" className={s.errorMessage} />
 
-                    </form>
+                    </Form>
+                    </Formik>
                 </Container>
             </section>
             <Goods title={'Вам также может понравиться'}/>
         </>
+
     );
 };
