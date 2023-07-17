@@ -9,7 +9,7 @@ export const ProductSize = ({ size, selectedSize, handleSizeChange }) => {
             <div className={s.list}>
                 {size?.map((item) => {
                     return (
-                        <label className={cn(s.size, s.item)} key={item}>
+                        <label className={cn(s.item)} key={item}>
                             <Field
                                 type="radio"
                                 name="selectedSize"
