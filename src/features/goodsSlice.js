@@ -13,13 +13,18 @@ export const fetchGender = createAsyncThunk(
 
 export const fetchCategory = createAsyncThunk(
     'goods/fetchCategory',
-    async (param) => {
+    async (param, {dispatch}) => {
         const url = new URL(GOODS_URL);
         for(const key in param) {
             url.searchParams.append(key, param[key])
         }
         const response = await fetch(url)
-        return await response.json()
+        const data = await response.json();
+        
+        if (data.goods.length === 0 && data.page > 1 && data.totalCount) {
+            dispatch(fetchCategory({ ...param, page: data.page - 1 }));
+        }
+        return data;
     }
 )
 
@@ -69,6 +74,7 @@ const goodsSlice = createSlice({
             })
             .addCase(fetchCategory.pending, (state) => {
                 state.status = 'loading'
+                state.totalCount = null
             })
             .addCase(fetchCategory.fulfilled, (state, action) => {
                 state.status = 'success'

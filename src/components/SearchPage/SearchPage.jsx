@@ -19,7 +19,7 @@ export const SearchPage = () => {
     return (
         goodsList.length > 0 
         ?
-        <Goods title='Результаты поиска'/>
+        <Goods title='Результат поиска'/>
         : <p className={s.empty}>Ничего не найдено. :(</p>
     )
 }
